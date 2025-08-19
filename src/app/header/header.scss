@@ -1,0 +1,59 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0b4f6c;
+  color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-name {
+  font-size: 1rem;
+}
+
+.signout-btn {
+  background-color: #f05454;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signout-btn:hover {
+  background-color: #d94343;
+}
+
+.brand-logo {
+  width: 60px;             /* Adjust logo size */
+  height: 60px;
+  border-radius: 50%;      /* Makes it circular */
+  background-color: white; /* White background */
+  padding: 8px;            /* Space between image and border */
+  object-fit: contain;     /* Keeps the logo's aspect ratio */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15); /* Optional: adds subtle shadow */
+}

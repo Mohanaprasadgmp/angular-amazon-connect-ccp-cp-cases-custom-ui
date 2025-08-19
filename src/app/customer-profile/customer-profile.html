@@ -1,0 +1,72 @@
+<!-- customer-profile.html -->
+<div class="container-fluid p-3">
+  <div class="card shadow-sm border-0">
+    <div
+      class="card-header d-flex justify-content-between align-items-center text-white"
+      style="background-color: #0b4f6c"
+      (click)="toggleAttributes()"
+    >
+      <h5 class="mb-0">
+        Customer Profile
+        <span style="font-size: smaller">
+          <i
+            class="bi"
+            [ngClass]="{ 'bi-chevron-down': !isExpanded, 'bi-chevron-up': isExpanded }"
+          ></i>
+        </span>
+      </h5>
+      <button class="btn btn-light btn-sm" disabled>+ Add Profile</button>
+    </div>
+
+    <div class="card-body" style="font-size: 14px" *ngIf="isExpanded">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="mb-2">
+            <strong>Profile ID:</strong> {{(customer$ | async)?.profileId ||
+            '-'}}
+          </div>
+          <div class="mb-2">
+            <strong>First Name:</strong> {{(customer$ | async)?.firstName ||
+            '-'}}
+          </div>
+          <div class="mb-2">
+            <strong>Last Name:</strong> {{(customer$ | async)?.lastName || '-'}}
+          </div>
+          <div class="mb-2">
+            <strong>Phone:</strong> {{(customer$ | async)?.phone || '-'}}
+          </div>
+          <div class="mb-2">
+            <strong>Birth Date:</strong> {{(customer$ | async)?.birthDate ||
+            '-'}}
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <div class="mb-2">
+            <strong>Email:</strong> {{(customer$ | async)?.email || '-'}}
+          </div>
+          <div class="mb-2">
+            <strong>Gender:</strong> {{(customer$ | async)?.gender || '-'}}
+          </div>
+          <div class="mb-2">
+            <strong>Billing Address:</strong> {{(customer$ |
+            async)?.billingAddress || '-'}}
+          </div>
+          <div class="mb-2">
+            <strong>Mailing Address:</strong> {{(customer$ |
+            async)?.mailingAddress || '-'}}
+          </div>
+          <div class="mb-2">
+            <strong>Additional Info:</strong> {{(customer$ |
+            async)?.additionalInfo || '-'}}
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading indicator (optional) -->
+      <div *ngIf="!(customer$ | async)" class="text-center text-muted mt-3">
+        <small>Customer Profile will be loaded once call is connected</small>
+      </div>
+    </div>
+  </div>
+</div>

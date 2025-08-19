@@ -1,0 +1,103 @@
+<div class="container-fluid p-3">
+  <!-- Card Wrapper -->
+  <div class="card shadow-sm border-0">
+    <!-- Header -->
+    <div class="card-header d-flex justify-content-between align-items-center text-white"
+      style="background-color: #0b4f6c" (click)="toggleAttributes()">
+      <h5 class="mb-0">
+        Cases
+        <span style="font-size: smaller;">
+          <i class="bi" [ngClass]="{ 'bi-chevron-down': !isExpanded, 'bi-chevron-up': isExpanded }"></i>
+        </span>
+      </h5>
+      <div>
+        <button class="btn btn-light btn-sm me-2" disabled>
+          + Create Case
+        </button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive" *ngIf="isExpanded">
+      @if (cases && cases.length > 0) {
+        <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>Status</th>
+            <th>Reference ID</th>
+            <th>Title</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let caseItem of cases">
+            <td>
+              <span class="badge" [ngClass]="{
+                  'bg-success': caseItem.status.toLowerCase() === 'open',
+                  'bg-warning text-dark': caseItem.status.toLowerCase() === 'pending',
+                  'bg-danger': caseItem.status.toLowerCase() === 'closed'
+                }">
+                {{ caseItem.status }}
+              </span>
+            </td>
+            <td>
+              <a href="javascript:void(0)" (click)="openCaseDetails(caseItem)">
+                {{ caseItem.referenceId }}
+              </a>
+            </td>
+            <td>
+              <a href="javascript:void(0)" (click)="openCaseDetails(caseItem)">
+                {{ caseItem.title }}
+              </a>
+            </td>
+            <td>{{ caseItem.lastUpdated | date: "MMM d, y h:mm a" }}</td>
+            <td>
+              <button class="btn btn-outline-primary btn-sm me-1">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-outline-danger btn-sm">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      }
+      @else {
+        <div class="text-center p-3">
+          <p class="text-muted">Cases will be loaded once call is connected</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Case Details Modal -->
+<div class="modal fade" id="caseDetailsModal" tabindex="-1" aria-labelledby="caseDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #0b4f6c">
+        <h5 class="modal-title" id="caseDetailsModalLabel">
+          Case Details - {{ selectedCase?.referenceId }}
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Status:</strong> {{ selectedCase?.status }}</p>
+        <p><strong>Reference ID:</strong> {{ selectedCase?.referenceId }}</p>
+        <p><strong>Title:</strong> {{ selectedCase?.title }}</p>
+        <p>
+          <strong>Last Updated:</strong> {{ selectedCase?.lastUpdated |
+          date:'MMM d, y h:mm a' }}
+        </p>
+        <p><strong>Summary:</strong> {{ selectedCase?.description }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
